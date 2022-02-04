@@ -3,10 +3,18 @@
     // then supply whether the value gonna be degrees or radians
     // if degree pass d else anything will result in radians calculation.
 
-#include "Trignometry_funcs.h"
+//for sine
+        //s = s + powerof1(i) * mypower(x, 2 * i + 1) / fact(2 * i + 1); //taylors series
+
+// for cosine
+        //s = s + powerof1(i) * mypower(x, 2 * i) / fact(2 * i);
+
+
+#include "Trig_funcs.h"
 
 trignometry::trignometry(int iterations, char choice)
     {
+        pof1 = 1;
         iter = iterations;
         c = choice;
         s = 0;
@@ -15,30 +23,7 @@ trignometry::trignometry(int iterations, char choice)
         p=1;
     } 
 
-int trignometry::powerof1(int x)
-{
-    if ((x & 1) == 1)
-        return -1;
-    else
-        return 1;
-}
-
-unsigned long long int trignometry::fact(unsigned int x)
-{
-    unsigned long long int fact=1;
-    if(x==0 || x==1)
-        return 1;
-    else
-    {
-        for(unsigned int i=1;i<=x;i++)
-        {
-            fact = fact * i;
-        }
-        return fact;
-    }
-} 
-
-// my power functions cannot handle fractional power exp
+// my power functions cannot handle fractional power exp, its a basic slow power func
 double trignometry::mypower(double base, int exp)
 {
     if(exp==0)
@@ -67,7 +52,8 @@ void trignometry::deg2rad(double *deg)
 
 double trignometry::sin(double x)
 {  
-   s = 0.0;
+    pof1 = 1;
+    s = 0.0;
     if(x<0)
     {
         sign = -1.0;
@@ -82,8 +68,15 @@ double trignometry::sin(double x)
         exit(EXIT_FAILURE);
 
     
-    for(int i=0;i<iter;i++)
-        s = s + powerof1(i) * mypower(x, 2 * i + 1) / fact(2 * i + 1); //taylors series
+    for (int i = 0; i < iter; i++)
+    {
+        if ((i & 1) == 1)
+            pof1 = -1;
+        else
+            pof1 = 1;
+
+        s = s + pof1 * mypower(x, 2 * i + 1) * invf[2 * i + 1]; //taylors series
+    }
 
     return s*sign;
     sign = 1.0;
@@ -91,6 +84,7 @@ double trignometry::sin(double x)
 
 double trignometry::cos(double x)
 {
+    pof1 = 1;
     s = 0.0; 
     if(x<0)
         x = x * -1;
@@ -101,8 +95,14 @@ double trignometry::cos(double x)
     else
         exit(EXIT_FAILURE);
 
-    for(int i=0;i<iter;i++)
-        s = s + powerof1(i) * mypower(x, 2 * i) / fact(2 * i);
+    for (int i = 0; i < iter; i++)
+    {
+        if ((i & 1) == 1)
+            pof1 = -1;
+        else
+            pof1 = 1;
+        s = s + pof1 * mypower(x, 2 * i) * invf[2 * i];
+    }
 
     return s;
 }
