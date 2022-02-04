@@ -1,5 +1,5 @@
 
-#include"Trig.h"
+#include"Trig_funcs.h"
 #include"timer.h"
 using namespace std;
 
