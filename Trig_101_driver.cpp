@@ -1,5 +1,5 @@
 
-#include"Trignometry_funcs.h"
+#include"Trig.h"
 #include"timer.h"
 using namespace std;
 
@@ -8,7 +8,7 @@ int main()
 {
     cout<<"\n\n*************** Trignometry 101 ******************************\n\n";
 
-    cout<<" (don't do more than 20 that's fucking toooooo much)\n";
+    cout<<" (don't do more than 20 that's toooooo much)\n";
     cout<<" Enter the accuracy for function evaluation : ";
     int acc;
     cin>>acc;
@@ -45,7 +45,7 @@ int main()
                 break;
             }
             default:
-                cerr<<"\nloosu koodhi mela padichi paathu choose pandra\n\n";
+                cerr<<"\ni dont know what to say\n\n";
                 cin.get();
                 break;
         }
@@ -56,7 +56,6 @@ int main()
     return 0;
     
 }
-       
 
 
 
