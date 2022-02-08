@@ -1,6 +1,7 @@
 
-#include"Trig_funcs.h"
-#include"timer.h"
+#include<Trig_funcs.h>
+#include<timer.h>
+#include<math.h>
 using namespace std;
 
 
@@ -17,9 +18,6 @@ int main()
     int c;
     cin>>c;
 
-    {
-    //this brackets are for timer tim to create and delete itself so that we can know time
-    timer tim;
         switch(c)
         {
             case (1):
@@ -30,8 +28,16 @@ int main()
                 trignometry t(acc,'r');
                 cout<<"enter the rads :";
                 cin>>x;
+                {
+                timer tim;
                 cout<<" sine of "<<x<<" rads is "<<t.sin(x)<<"\n";
                 cout<<" cosine of "<<x<<" rads is "<<t.cos(x)<<"\n";
+                }
+                {
+                timer tim;
+                cout<<" \n\n\nsine of "<<x<<" rads using std math is "<<sin(x)<<"\n";
+                cout<<" cosine of "<<x<<" rads using std math is "<<cos(x)<<"\n";
+                }
                 break;
             }
 
@@ -49,7 +55,6 @@ int main()
                 cin.get();
                 break;
         }
-    }
 
     cin.get();
     cin.get();
